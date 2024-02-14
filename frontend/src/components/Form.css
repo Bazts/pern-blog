@@ -1,0 +1,12 @@
+.form-sign>.form-btn-submit {
+  display: block;
+  margin: 0 auto;
+}
+
+.form-sign {
+  padding: 1.5rem;
+
+  hr {
+    border-color: var(--pink-300);
+  }
+}

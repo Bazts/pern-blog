@@ -1,0 +1,18 @@
+.section-container {
+  display: flex;
+  justify-content: center;
+
+  header {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.section-content {
+  width: 320px;
+}
+
+.section-container.form .section-content {
+  background-color: #252629;
+  /* padding: 1.5rem; */
+  border-radius: 0.5rem;
+}

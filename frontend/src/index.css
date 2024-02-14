@@ -1,0 +1,74 @@
+:root {
+  --dark-color: #111;
+  --light-color: #f1f1f1;
+
+  --pink-50: #fcf4f4;
+  --pink-100: #fae9eb;
+  --pink-200: #f5d6db;
+  --pink-300: #eebbc3;
+  --pink-400: #e18b9a;
+  --pink-500: #d26178;
+  --pink-600: #bc4261;
+  --pink-700: #9e3250;
+  --pink-800: #852c48;
+  --pink-900: #722941;
+  --pink-950: #3f1220;
+
+
+
+  color-scheme: light dark;
+  background-color: #141619;
+
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  font-family: inherit;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  padding: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 0.25rem;
+  font-size: 15px;
+}
+
+button {
+  transition: all .125s ease;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 0.25rem;
+  border: none;
+
+  background-color: var(--pink-300);
+  color: #111;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--pink-400);
+}
+
+button:active {
+  background-color: var(--pink-500);
+}

@@ -1,0 +1,22 @@
+label {
+  display: flex;
+  flex-direction: column-reverse;
+  font-size: 14.25px;
+
+  span {
+    margin-bottom: 0.2rem;
+    color: #b3b3b3;
+  }
+}
+
+.input-element:focus {
+  outline: 2px solid #eebbc3;
+}
+
+.input-element:focus+span {
+  color: var(--pink-300);
+}
+
+.input-wrapper {
+  margin-bottom: 1rem;
+}
