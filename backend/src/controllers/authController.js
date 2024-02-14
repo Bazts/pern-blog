@@ -3,64 +3,32 @@ import { ErrorHandler } from '../utils/errorHandler.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-import { supabase } from '../db/supabaseClient.js'
-
-// export const register = async (req, res, next) => {
-//   const { username, email, password } = req.body
-
-//   try {
-//     const existingUserQuery = `
-//       SELECT * FROM users
-//       WHERE email = $1
-//     `
-//     const existingUserResponse = await pool.query(existingUserQuery, [email])
-//     const existingUser = existingUserResponse.rows[0]
-//     if (existingUser) {
-//       return next(new ErrorHandler(400, 'User with this email already exist'))
-//     }
-
-//     const saltRounds = 10
-//     const hashedPassword = await bcrypt.hash(password, saltRounds)
-
-//     const insertUserQuery = `
-//       INSERT INTO users (username, email, password)
-//       VALUES ($1, $2, $3)
-//       RETURNING *
-//     `
-//     const insertUserResponse = await pool.query(insertUserQuery, [username, email, hashedPassword])
-//     const newUser = insertUserResponse.rows[0]
-
-//     res.status(201).json({ message: 'User successfully created', user: newUser })
-//   } catch (error) {
-//     return next(new ErrorHandler(500, 'Internal Server Error'))
-//   }
-// }
-
 export const register = async (req, res, next) => {
   const { username, email, password } = req.body
 
   try {
-    const { user, error } = await supabase.auth.signUp({
-      email,
-      password
-    })
+    const existingUserQuery = `
+      SELECT * FROM users
+      WHERE email = $1
+    `
+    const existingUserResponse = await pool.query(existingUserQuery, [email])
+    const existingUser = existingUserResponse.rows[0]
+    if (existingUser) {
+      return next(new ErrorHandler(400, 'User with this email already exist'))
+    }
 
-    console.log(error + 'hola')
+    const saltRounds = 10
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-    if (error) throw error
+    const insertUserQuery = `
+      INSERT INTO users (username, email, password)
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `
+    const insertUserResponse = await pool.query(insertUserQuery, [username, email, hashedPassword])
+    const newUser = insertUserResponse.rows[0]
 
-    // Supabase auth automatically creates a new user in the 'auth.users' table.
-    // You can add additional user data (like 'username') to another table, if needed.
-    // Here's an example of how you can do this:
-    const { data, error: insertError } = await supabase
-      .from('users')
-      .insert([{ id: user.id, username }])
-
-    console.log(data)
-
-    if (insertError) throw insertError
-
-    res.status(201).json({ message: 'User successfully created', user })
+    res.status(201).json({ message: 'User successfully created', user: newUser })
   } catch (error) {
     return next(new ErrorHandler(500, 'Internal Server Error'))
   }
