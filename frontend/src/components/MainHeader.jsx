@@ -8,7 +8,7 @@ export const MainHeader = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    fetch('http://localhost:3000/api/auth/logout', {
+    fetch('https://blog-p5l4.onrender.com/api/auth/logout', {
       method: 'POST'
     })
     updateUser(null)

@@ -6,7 +6,7 @@ export const Home = () => {
   const [allUsers, setAllUsers] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/get-users')
+    fetch('https://blog-p5l4.onrender.com/get-users')
       .then(res => {
         if (!res.ok) return res.json().then(err => Promise.reject(err))
 
