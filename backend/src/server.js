@@ -9,19 +9,22 @@ const app = express()
 const port = 3000
 
 const __dirname = path.resolve()
-app.use(express.static(path.join(__dirname, '/frontend/dist')))
-app.get('*', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
-})
-
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }))
+
+app.use(express.static(path.join(__dirname, '/frontend/dist')))
+// app.get('*', async (req, res, next) => {
+//   next(
+//     res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+//   )
+// })
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/get-users', async (req, res) => {
+app.get('*', async (req, res) => {
   try {
     const getAllUsersQuery = `
     SELECT * FROM users
@@ -29,6 +32,8 @@ app.get('/get-users', async (req, res) => {
 
     const response = await pool.query(getAllUsersQuery)
     const users = response.rows
+
+    console.log(users)
 
     res.status(200).json({ users })
   } catch (error) {
