@@ -22,7 +22,7 @@ export const SignUpForm = () => {
   const handleSubmit = (e) => {
     const userData = Object.fromEntries(new window.FormData(e.target))
 
-    fetch('https://blog-p5l4.onrender.com/api/auth/register', {
+    fetch('/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ export const LogInForm = () => {
   const handleSubmit = (e) => {
     const userData = Object.fromEntries(new window.FormData(e.target))
 
-    fetch('https://blog-p5l4.onrender.com/api/auth/login', {
+    fetch('/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
